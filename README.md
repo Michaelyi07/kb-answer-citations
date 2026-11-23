@@ -14,11 +14,19 @@ prompts/kb_answer/v1.md        frozen prompt template v1 (three hard rules)
 prompts/kb_answer/CHANGELOG.md prompt version change record
 kb_answer/schema.py            JSON Schema (Draft 2020-12) + validate_answer()
 kb_answer/renderer.py          render {points, refused} to Markdown with [n] marks
+                               (strict mark/citation consistency, mismatch raises)
+kb_answer/evidence.py          evidence-block assembly ([n] order, title/version/
+                               heading_path) + per-user visibility filter
+kb_answer/gateway.py           S5-GW call path: assemble prompt -> stub call ->
+                               schema validation -> record -> L0 registration
+kb_answer/review_queue.py      L0 AI-review-queue registration stub (internal only)
 kb_answer/recorder.py          file-backed S5-GW interface stub (JSONL records)
 fixtures/evidence_sets.json    20 synthetic evidence sets (post-visibility-filter)
 fixtures/recorded_responses.json  20 recorded gateway responses (synthetic)
+fixtures/visibility_cases.json visibility-gate cases (public + cross-tenant blocks)
 tests/                         pytest suite (AC1-AC4 + negative/reverse checks)
 pytest.ini                     pythonpath=. / testpaths=tests
+requirements.txt               jsonschema==4.26.0, pytest==9.2.0
 ```
 
 ## Run
@@ -26,12 +34,13 @@ pytest.ini                     pythonpath=. / testpaths=tests
 Requirements: Python 3.11+, `jsonschema` (any recent 4.x), `pytest`.
 
 ```bash
-python -m pip install jsonschema pytest
+python -m pip install -r requirements.txt
 python -m pytest -q
 ```
 
-One command runs the whole suite (30 tests). See `VERIFICATION.md` for real
-command outputs captured on the delivery machine.
+One command runs the whole suite (49 tests) and works in a clean environment:
+requirements.txt declares the exact dependencies, and the tests/ package is
+importable from the repo root. See `VERIFICATION.md` for real captured outputs.
 
 ## Component notes
 
@@ -66,34 +75,54 @@ evidence as `[n] 《title》 version > heading_path`, and the fixed refusal line
 for `refused=true`. Citation numbers outside the evidence blocks raise
 `ValueError`.
 
-### S5-GW interface stub (`kb_answer/recorder.py`)
+### S5-GW call path (`kb_answer/gateway.py`)
 
-The real model gateway (S5-GW) is out of scope for this order. Per the unified
-technical agreement this file-backed stub is the agreed interface: every answer
-is recorded as one JSONL line
+`generate_answer(question, evidence_set, gateway=..., queue=..., requester_scope=...)`
+is the full call path mandated by the order:
+
+1. **Visibility gate** — `evidence.filter_visible_evidences` drops any evidence
+   outside the requester's visible scope before prompt assembly (cross-tenant
+   blocks never enter the prompt).
+2. **Prompt assembly** — `assemble_prompt` concatenates the evidence blocks in
+   [n] order (each `[n] 《doc_title》 version > heading_path` plus the verbatim
+   text, via `evidence.build_evidence_blocks`) under the frozen v1 template.
+3. **Gateway call** — `S5GatewayStub.call(prompt)` replays the recorded response
+   for the evidence set through the same signature a real gateway exposes
+   (prompt in, model output + model identity out).
+4. **Schema validation** — the response is validated against the Draft 2020-12
+   schema (`schema.validate_answer`).
+5. **Visibility post-check** — an answer citing evidence that was filtered out
+   of the prompt is rejected (refused); other members' data can never leak.
+6. **Record + L0 registration** — `recorder.make_record` builds the record
+   (prompt_id=kb_answer/v1, prompt_version, model_name, model_version,
+   response_digest, recorded_at) and `review_queue.L0ReviewQueue.register`
+   registers the answer at level L0 with `internal_only: true`.
+
+**Real-gateway swap points**: implement `call(prompt, *, evidence_set_id)`
+against the real S5-GW endpoint and keep the return shape
+`{response, model_name, model_version, recorded_at}` — prompt, schema, records
+and queue need no change. `recorder.py` remains the file-backed JSONL interface
+for the records themselves.
+
+### AI review queue (L0 registration, `kb_answer/review_queue.py`)
+
+`L0ReviewQueue` appends one registration payload per answer to a JSONL file:
 
 ```
-{prompt_id, prompt_version, model_name, model_version, response_digest, recorded_at, response}
+{level: "L0", internal_only: true, audience: "staff_only", dispatch: "internal_review", question, evidence_set_id, item: <record>}
 ```
 
-**Connection points for the real gateway** (no prompt or schema change needed):
-- gateway persists one line per call via `make_record()` + `write_records()`;
-  `load_records()` reads them back in write order.
-- `response_digest()` is a stable sha256 over the canonical JSON of the answer.
-- `PROMPT_ID` / `PROMPT_VERSION` in `kb_answer/__init__.py` must match the
-  template file name and its `prompt_version` header; the AC4 tests pin them
-  to the fixture records.
-
-### AI review queue (L0 registration)
-
-Answers are registered at level L0 (internal staff reference only, never sent
-to members directly). The registration payload is the record produced by the
-recorder; no further integration is part of this order.
+The stub is registration-only by design — there is no outward-send path. Tests
+assert every answer is registered at L0 with internal-only dispatch (20/20
+through the pipeline), and that a leaking response is registered as refused,
+never in raw form. The real S5 review queue plugs in by consuming these
+payloads.
 
 ## Data
 
-All 20 evidence sets and recorded responses are synthetic (document titles,
-companies, figures are fictional). Evidence sets carry `visible_scope` to
-record the result of the per-user visibility filtering that the (out-of-scope)
-retrieval side applies upstream. Sets tagged `pricing` are the price samples
-exercised by the verbatim-figure tests (AC3).
+All evidence sets, recorded responses and visibility cases are synthetic
+(document titles, companies, figures are fictional). Evidence sets carry
+`visible_scope` (the post-filter result of the retrieval side); visibility-case
+evidence additionally carries per-evidence `visible_scope` to demonstrate the
+cross-tenant filtering boundary. Sets tagged `pricing` are the price samples
+exercised by the verbatim-figure tests (AC3, full-number-boundary matching).

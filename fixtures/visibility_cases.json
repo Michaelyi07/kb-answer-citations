@@ -1,0 +1,73 @@
+{
+  "note": "Visibility-gate fictional cases: each case carries evidence blocks with per-evidence visible_scope (null = public within the call, a scope string = visible only to that requester) and a recorded response. VIS-OK cites only the public block and passes the pipeline; VIS-LEAK's recorded response cites the cross-tenant block, which the visibility gate must reject (refused) so other members' data never leaks. All content synthetic.",
+  "cases": [
+    {
+      "case_id": "VIS-OK",
+      "requester_scope": "org:mem-017",
+      "question": "会议室怎么预订？",
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会议室使用SOP",
+          "version": "v4.1",
+          "heading_path": ["预订流程"],
+          "text": "在小程序「空间-会议室」中选择日期与时段提交，系统确认后即可使用；开始前 2 小时以外可免费取消。",
+          "visible_scope": null
+        },
+        {
+          "n": 2,
+          "doc_title": "会员预订摘录（外部租户）",
+          "version": "v1.0",
+          "heading_path": ["其他会员预订"],
+          "text": "A 科技公司于 12 月 1 日 14:00 预订翠竹厅（本条仅 org:mem-099 可见）。",
+          "visible_scope": "org:mem-099"
+        }
+      ],
+      "recorded_response": {
+        "response": {
+          "points": [
+            {"text": "在小程序「空间-会议室」选择日期与时段提交预订，开始前 2 小时以外可免费取消[1]。", "citations": [1]}
+          ],
+          "refused": false
+        },
+        "model_name": "Qwen2.5-14B-Instruct",
+        "model_version": "2026-06",
+        "recorded_at": "2026-11-23T15:00:00+00:00"
+      }
+    },
+    {
+      "case_id": "VIS-LEAK",
+      "requester_scope": "org:mem-017",
+      "question": "A 科技公司订了哪些会议室？",
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "数据与保密守则",
+          "version": "v1.0",
+          "heading_path": ["会员信息"],
+          "text": "单个会员企业的预订、缴费与合同信息仅对被授权员工可见。",
+          "visible_scope": null
+        },
+        {
+          "n": 2,
+          "doc_title": "会员预订摘录（外部租户）",
+          "version": "v1.0",
+          "heading_path": ["其他会员预订"],
+          "text": "A 科技公司于 12 月 1 日 14:00 预订翠竹厅（本条仅 org:mem-099 可见）。",
+          "visible_scope": "org:mem-099"
+        }
+      ],
+      "recorded_response": {
+        "response": {
+          "points": [
+            {"text": "A 科技公司于 12 月 1 日 14:00 预订了翠竹厅[2]。", "citations": [2]}
+          ],
+          "refused": false
+        },
+        "model_name": "Qwen2.5-14B-Instruct",
+        "model_version": "2026-06",
+        "recorded_at": "2026-11-23T15:01:30+00:00"
+      }
+    }
+  ]
+}
