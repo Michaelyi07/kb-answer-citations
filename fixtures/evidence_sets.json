@@ -1,0 +1,452 @@
+{
+  "note": "20 fictional evidence sets for S3-KB-020. Each set is what the (out-of-scope) retrieval side would return AFTER per-user visibility filtering; visible_scope records the filter result. tags.pricing marks price-bearing sets used by the verbatim-figure tests. All documents, companies, figures are synthetic.",
+  "sets": [
+    {
+      "evidence_set_id": "EV-P01",
+      "question": "大型会议室租一小时多少钱？",
+      "visible_scope": "org:mem-017",
+      "tags": ["pricing"],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会议室与场地使用价目表",
+          "version": "v3.0",
+          "heading_path": ["会议室", "时租价格"],
+          "text": "大型会议室（12 人以上）工作日时租为 ￥120/小时，非工作日为 ￥90/小时。时租以实际使用时长计，起租 1 小时。"
+        },
+        {
+          "n": 2,
+          "doc_title": "会议室与场地使用价目表",
+          "version": "v3.0",
+          "heading_path": ["会议室", "预订方式"],
+          "text": "会议室须通过小程序或前台预订，使用结束后请恢复桌椅原位并关闭设备。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-P02",
+      "question": "会员年费是多少？",
+      "visible_scope": "org:mem-017",
+      "tags": ["pricing"],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会员等级与年费说明",
+          "version": "v1.4",
+          "heading_path": ["年费标准"],
+          "text": "标准会员年费为 6800 元/年，旗舰会员年费为 12800 元/年。年费按自然年缴纳，不含活动场地加购费用。"
+        },
+        {
+          "n": 2,
+          "doc_title": "会员等级与年费说明",
+          "version": "v1.4",
+          "heading_path": ["升级与降级"],
+          "text": "会员等级每年评定一次，由运营部根据上一年度使用情况确定。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-P03",
+      "question": "打印一份彩色 A4 多少钱？",
+      "visible_scope": "org:mem-017",
+      "tags": ["pricing"],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "商务服务价目表",
+          "version": "v2.2",
+          "heading_path": ["打印复印", "价格"],
+          "text": "A4 黑白打印 0.2 元/页，A4 彩色打印 1.5 元/页；A3 规格按 A4 的两倍计费。打印服务在二楼商务中心提供。"
+        },
+        {
+          "n": 2,
+          "doc_title": "商务服务价目表",
+          "version": "v2.2",
+          "heading_path": ["打印复印", "注意事项"],
+          "text": "涉密文件请使用一楼独立打印间，用后请取走原件与打印件。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-P04",
+      "question": "临时工位一天租金多少？",
+      "visible_scope": "org:mem-017",
+      "tags": ["pricing"],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "开放工位使用规范",
+          "version": "v1.1",
+          "heading_path": ["临时工位", "租金"],
+          "text": "临时工位租金为 150 元/天，含有线与无线网络接入；连续使用超过 3 天请转为月租申请。"
+        },
+        {
+          "n": 2,
+          "doc_title": "开放工位使用规范",
+          "version": "v1.1",
+          "heading_path": ["临时工位", "使用时间"],
+          "text": "临时工位使用时间为工作日 08:30 至 19:30。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-P05",
+      "question": "办活动场地的押金怎么收？",
+      "visible_scope": "org:mem-017",
+      "tags": ["pricing"],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "活动场地使用管理办法",
+          "version": "v2.0",
+          "heading_path": ["押金"],
+          "text": "使用多功能厅等场地须缴纳押金 2000 元，活动结束经场地检查合格后，押金于 7 个工作日内原路退回。"
+        },
+        {
+          "n": 2,
+          "doc_title": "活动场地使用管理办法",
+          "version": "v2.0",
+          "heading_path": ["布场与撤场"],
+          "text": "布场时间须与运营专员预约，撤场后不得遗留物料。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-P06",
+      "question": "咖啡券怎么卖？",
+      "visible_scope": "org:mem-017",
+      "tags": ["pricing"],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "水吧服务说明",
+          "version": "v1.3",
+          "heading_path": ["咖啡券"],
+          "text": "咖啡单次券售价 30 元/张，十次券售价 260 元/套；券仅限本人使用，不计入会员等级评定。"
+        },
+        {
+          "n": 2,
+          "doc_title": "水吧服务说明",
+          "version": "v1.3",
+          "heading_path": ["营业时间"],
+          "text": "水吧营业时间为工作日 08:00 至 18:00。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-R01",
+      "question": "翠竹厅最多能容纳多少人？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会议室与场地使用价目表",
+          "version": "v3.0",
+          "heading_path": ["会议室", "预订方式"],
+          "text": "会议室须通过小程序或前台预订，使用结束后请恢复桌椅原位并关闭设备。"
+        },
+        {
+          "n": 2,
+          "doc_title": "会议室与场地使用价目表",
+          "version": "v3.0",
+          "heading_path": ["会议室", "设备"],
+          "text": "大会议室配备投屏、视频会议终端与无线话筒。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-R02",
+      "question": "云帆科技今年续费交了多少？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会员等级与年费说明",
+          "version": "v1.4",
+          "heading_path": ["年费标准"],
+          "text": "标准会员年费为 6800 元/年，旗舰会员年费为 12800 元/年。年费按自然年缴纳，不含活动场地加购费用。"
+        },
+        {
+          "n": 2,
+          "doc_title": "数据与保密守则",
+          "version": "v1.0",
+          "heading_path": ["会员信息"],
+          "text": "单个会员企业的缴费、合同与商机信息仅对被授权员工可见，禁止在无授权场景查询或转发。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-R03",
+      "question": "明年会员年费会涨吗？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会员等级与年费说明",
+          "version": "v1.4",
+          "heading_path": ["年费标准"],
+          "text": "标准会员年费为 6800 元/年，旗舰会员年费为 12800 元/年。年费按自然年缴纳，不含活动场地加购费用。"
+        },
+        {
+          "n": 2,
+          "doc_title": "会员等级与年费说明",
+          "version": "v1.4",
+          "heading_path": ["调整机制"],
+          "text": "年费标准如有调整，将提前 30 天在会员端公告。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-R04",
+      "question": "现在平台上有多少家会员企业？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "新会员入驻指引",
+          "version": "v1.2",
+          "heading_path": ["入驻材料"],
+          "text": "新会员入驻须提交营业执照复印件、经办人名片与入会申请表。"
+        },
+        {
+          "n": 2,
+          "doc_title": "新会员入驻指引",
+          "version": "v1.2",
+          "heading_path": ["审核"],
+          "text": "入驻材料由招商部初审，运营部复核后开通会员账号。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-N01",
+      "question": "怎么预订会议室？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会议室使用SOP",
+          "version": "v4.1",
+          "heading_path": ["预订流程"],
+          "text": "在小程序「空间-会议室」中选择日期与时段，提交后等待系统确认；确认通知会在 10 分钟内发出。"
+        },
+        {
+          "n": 2,
+          "doc_title": "会议室使用SOP",
+          "version": "v4.1",
+          "heading_path": ["预订流程", "变更与取消"],
+          "text": "开始前 2 小时以外可免费取消，2 小时以内的取消请电话联系前台登记。"
+        },
+        {
+          "n": 3,
+          "doc_title": "会议室使用SOP",
+          "version": "v4.1",
+          "heading_path": ["现场使用"],
+          "text": "会议结束后请白板擦净、设备关闭，残留物品由保洁统一清理。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-N02",
+      "question": "旗舰会员有什么专属权益？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会员权益手册",
+          "version": "v2.5",
+          "heading_path": ["旗舰会员权益"],
+          "text": "旗舰会员享独立储物柜一间、每月 4 小时免费会议室时长、招商资源对接优先排期。"
+        },
+        {
+          "n": 2,
+          "doc_title": "会员权益手册",
+          "version": "v2.5",
+          "heading_path": ["标准会员权益"],
+          "text": "标准会员享每月 1 小时免费会议室时长与公共储物柜使用。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-N03",
+      "question": "园区周末开放吗？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "园区开放时间说明",
+          "version": "v1.0",
+          "heading_path": ["常规开放"],
+          "text": "园区公共区域周末开放时间为 09:00 至 17:00；工作日为 07:30 至 21:00。"
+        },
+        {
+          "n": 2,
+          "doc_title": "园区开放时间说明",
+          "version": "v1.0",
+          "heading_path": ["节假日"],
+          "text": "法定节假日开放安排另行公告，由物业提前 3 天在会员端发布。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-N04",
+      "question": "访客来园区怎么登记？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "访客接待SOP",
+          "version": "v1.6",
+          "heading_path": ["登记"],
+          "text": "会员提前在小程序提交访客信息（姓名、手机号、到访时间），访客到一楼前台出示登记码换取访客牌。"
+        },
+        {
+          "n": 2,
+          "doc_title": "访客接待SOP",
+          "version": "v1.6",
+          "heading_path": ["陪同"],
+          "text": "访客在园区内须由邀请会员全程陪同，访客牌当日有效、离园时交回前台。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-N05",
+      "question": "会议室的投影设备怎么连接？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会议室设备使用指南",
+          "version": "v2.3",
+          "heading_path": ["投屏"],
+          "text": "笔记本投屏使用会议室桌面的 HDMI 线或选择无线投屏器，无线投屏配对码显示在屏幕右上角。"
+        },
+        {
+          "n": 2,
+          "doc_title": "会议室设备使用指南",
+          "version": "v2.3",
+          "heading_path": ["故障报修"],
+          "text": "设备故障请在小程序「报修」入口提交，IT 支持 30 分钟内响应。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-N06",
+      "question": "会员停车怎么收费？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "停车场管理办法",
+          "version": "v1.8",
+          "heading_path": ["会员车辆"],
+          "text": "会员企业车辆在地库 B1/B2 层停放，凭会员车牌白名单免费入场，每日首次入场 4 小时内免费。"
+        },
+        {
+          "n": 2,
+          "doc_title": "停车场管理办法",
+          "version": "v1.8",
+          "heading_path": ["访客车辆"],
+          "text": "访客车辆按地库入口公示的标准计时收费，收费系统由物业运营。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-N07",
+      "question": "订了会议室临时不用了怎么取消？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会议室使用SOP",
+          "version": "v4.1",
+          "heading_path": ["预订流程", "变更与取消"],
+          "text": "开始前 2 小时以外可免费取消，2 小时以内的取消请电话联系前台登记。"
+        },
+        {
+          "n": 2,
+          "doc_title": "会议室使用SOP",
+          "version": "v4.1",
+          "heading_path": ["预订流程"],
+          "text": "在小程序「空间-会议室」中选择日期与时段，提交后等待系统确认；确认通知会在 10 分钟内发出。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-N08",
+      "question": "会员等级是怎么评定的？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "会员等级与年费说明",
+          "version": "v1.4",
+          "heading_path": ["升级与降级"],
+          "text": "会员等级每年评定一次，由运营部根据上一年度使用情况确定。"
+        },
+        {
+          "n": 2,
+          "doc_title": "会员等级与年费说明",
+          "version": "v1.4",
+          "heading_path": ["年费标准"],
+          "text": "标准会员年费为 6800 元/年，旗舰会员年费为 12800 元/年。年费按自然年缴纳，不含活动场地加购费用。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-N09",
+      "question": "园区无线网怎么连？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "网络服务说明",
+          "version": "v1.5",
+          "heading_path": ["无线网络"],
+          "text": "会员网络 SSID 为 Member-Office，账号为会员手机号，初始密码在入驻欢迎邮件中提供。"
+        },
+        {
+          "n": 2,
+          "doc_title": "网络服务说明",
+          "version": "v1.5",
+          "heading_path": ["访客网络"],
+          "text": "访客网络 Guest-WiFi 每日限速 10Mbps，仅供临时上网使用。"
+        }
+      ]
+    },
+    {
+      "evidence_set_id": "EV-N10",
+      "question": "对园区服务不满意找谁投诉？",
+      "visible_scope": "org:mem-017",
+      "tags": [],
+      "evidences": [
+        {
+          "n": 1,
+          "doc_title": "客户服务与投诉处理SOP",
+          "version": "v2.1",
+          "heading_path": ["投诉渠道"],
+          "text": "投诉通过小程序「意见反馈」提交，或到三楼客户成功部当面登记；受理后 1 个工作日内响应。"
+        },
+        {
+          "n": 2,
+          "doc_title": "客户服务与投诉处理SOP",
+          "version": "v2.1",
+          "heading_path": ["处理时限"],
+          "text": "一般投诉 3 个工作日内办结，复杂投诉办结时限由客户成功部与投诉人确认。"
+        }
+      ]
+    }
+  ]
+}
